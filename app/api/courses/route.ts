@@ -1,5 +1,7 @@
 import { db } from "@/lib/db";
+import { useUser } from "@clerk/clerk-react";
 import { auth } from "@clerk/nextjs";
+import { useConvexAuth } from "convex/react";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {

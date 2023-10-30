@@ -3,3 +3,5 @@ const CourseIdPage = ({ params }: { params: { courseId: string } }) => {
 };
 
 export default CourseIdPage;
+
+//2:10:00
