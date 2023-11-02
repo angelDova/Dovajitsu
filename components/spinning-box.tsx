@@ -14,7 +14,7 @@ const SpinningBoxText = () => {
   return (
     <span className="flex flex-col items-center justify-center gap-6 text-5xl font-semibold [#1f1f1f] dark:text-white md:flex-row md:gap-4 text-black">
       <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold flex flex-col">
-        Welcome to the &nbsp;
+        Welcome tothe &nbsp;
         <span className="underline">Dovadoggdojo</span>
       </h1>
       <Box front="Train" bottom="Eat" back="Sleep" top="Repeat" />
