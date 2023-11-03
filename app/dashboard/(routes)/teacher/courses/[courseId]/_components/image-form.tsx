@@ -4,13 +4,14 @@ import * as z from "zod";
 import axios from "axios";
 import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 import { useState } from "react";
-import toast from "react-hot-toast";
+
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
+import { toast } from "sonner";
 
 interface ImageFormProps {
   initialData: Course;
@@ -33,11 +34,15 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Course updated");
+      toast.success("Course updated", {
+        position: "top-center",
+      });
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", {
+        position: "top-center",
+      });
     }
   };
 

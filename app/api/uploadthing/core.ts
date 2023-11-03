@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs";
+
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 import { isTeacher } from "@/lib/teacher";
@@ -7,9 +8,10 @@ const f = createUploadthing();
 
 const handleAuth = () => {
   const { userId } = auth();
+
   const isAuthorized = isTeacher(userId);
 
-  if (!userId || !isAuthorized) throw new Error("Unauthorized");
+  if (!userId) throw new Error("Unauthorized");
   return { userId };
 };
 
@@ -26,3 +28,5 @@ export const ourFileRouter = {
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
+
+// 3:13:56
