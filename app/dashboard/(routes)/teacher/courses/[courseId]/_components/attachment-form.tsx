@@ -58,7 +58,7 @@ export const AttachmentForm = ({
           {!isEditing && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add file(s)
+              Add file
             </>
           )}
         </Button>
