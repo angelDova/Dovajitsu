@@ -2,11 +2,11 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
+import { Pencil, PlusCircle, ImageIcon, File, Loader2, X } from "lucide-react";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import { Course } from "@prisma/client";
+import { Attachment, Course } from "@prisma/client";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
@@ -14,14 +14,12 @@ import { FileUpload } from "@/components/file-upload";
 import { toast } from "sonner";
 
 interface AttachmentFormProps {
-  initialData: Course;
+  initialData: Course & { attachments: Attachment[] };
   courseId: string;
 }
 
 const formSchema = z.object({
-  imageUrl: z.string().min(1, {
-    message: "Image is required",
-  }),
+  url: z.string().min(1),
 });
 
 export const AttachmentForm = ({
@@ -29,6 +27,7 @@ export const AttachmentForm = ({
   courseId,
 }: AttachmentFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -36,7 +35,7 @@ export const AttachmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, values);
+      await axios.post(`/api/courses/${courseId}/attachments`, values);
       toast.success("Course updated", {
         position: "top-center",
       });
@@ -49,6 +48,23 @@ export const AttachmentForm = ({
     }
   };
 
+  const onDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+      await axios.delete(`api/courses/${courseId}/attachments/${id}`);
+      toast.success("Attachment deleted", {
+        position: "top-center",
+      });
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong", {
+        position: "top-center",
+      });
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -58,38 +74,58 @@ export const AttachmentForm = ({
           {!isEditing && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add file
+              Add file(s)
             </>
           )}
         </Button>
       </div>
-      {!isEditing &&
-        (!initialData.imageUrl ? (
-          <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
-            <ImageIcon className="h-10 w-10 text-slate-500" />
-          </div>
-        ) : (
-          <div className="relative aspect-video mt-2">
-            <Image
-              alt="Upload"
-              fill
-              className="object-cover rounded-md"
-              src={initialData.imageUrl}
-            />
-          </div>
-        ))}
+      {!isEditing && (
+        <>
+          {initialData.attachments.length === 0 && (
+            <p className="text-sm mt-2 tesxt-slate-500 italic">
+              No attachments yet
+            </p>
+          )}
+          {initialData.attachments.length > 0 && (
+            <div className="space-y-2">
+              {initialData.attachments.map((attachment) => (
+                <div
+                  key={attachment.id}
+                  className="flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md"
+                >
+                  <File className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <p className="text-xs line-clamp-1">{attachment.name}</p>
+                  {deletingId === attachment.id && (
+                    <div className="">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    </div>
+                  )}
+                  {deletingId !== attachment.id && (
+                    <button
+                      onClick={() => onDelete(attachment.id)}
+                      className="ml-auto hover:opacity-75 transition"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
       {isEditing && (
         <div>
           <FileUpload
-            endpoint="courseImage"
+            endpoint="courseAttachment"
             onChange={(url) => {
               if (url) {
-                onSubmit({ imageUrl: url });
+                onSubmit({ url: url });
               }
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            16:9 aspect ratio recommended
+            Add anything your students might need to complete your course.
           </div>
         </div>
       )}
