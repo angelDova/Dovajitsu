@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 
 import { Button } from "@/components/ui/button";
-import { Pencil, PlusCircle } from "lucide-react";
+import { Loader2, Pencil, PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -63,8 +63,37 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
     }
   };
 
+  const onReorder = async (updateData: { id: string; position: number }[]) => {
+    try {
+      setIsUpdating(true);
+
+      await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+        list: updateData,
+      });
+      toast.success("Chapters reordered successfully ✅ ", {
+        position: "top-center",
+      });
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong", {
+        position: "top-center",
+      });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const onEdit = (id: string) => {
+    router.push(`/dashboard/teacher/courses/${courseId}/chapters/${id}`);
+  };
+
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+      {isUpdating && (
+        <div className="absolute h-full w-full bg-slate-700/20 top-0 right-0 rounded-md flex items-center justify-center">
+          <Loader2 className="animate-spin h-6 w-6 text-sky-700" />
+        </div>
+      )}
       <div className="font-medium flex items-center justify-between">
         Course Chapters
         <Button onClick={toggleCreating} variant="ghost">
@@ -92,7 +121,7 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
+                      placeholder="i.e. 'Introduction to the course'"
                       {...field}
                     />
                   </FormControl>
@@ -116,8 +145,8 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
         >
           {!initialData.chapters.length && "No chapters"}
           <ChaptersList
-            onEdit={() => {}}
-            onReorder={() => {}}
+            onEdit={onEdit}
+            onReorder={onReorder}
             items={initialData.chapters || []}
           />
         </div>
