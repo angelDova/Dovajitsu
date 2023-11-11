@@ -8,7 +8,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
-    const values = await req.json();
+    const { isPublished, ...values } = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -19,6 +19,23 @@ export async function PATCH(
         id: params.courseId,
       },
     });
+    if (!ownCourse) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const chapter = await db.chapter.update({
+      where: {
+        id: params.chapterId,
+        courseId: params.courseId,
+      },
+      data: {
+        ...values,
+      },
+    });
+
+    // Handle Video Upload
+
+    return NextResponse.json(chapter);
   } catch (error) {
     console.log("COURSE_CHAPTER_ID", error);
     return new NextResponse("Internal Error", { status: 500 });
