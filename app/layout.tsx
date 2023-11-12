@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-providers";
 import { ToastProvider } from "@/components/providers/toaster-provider";
 import { Toaster } from "sonner";
+import { ConfettiProvider } from "@/components/providers/confetti-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="dovajitsu-theme"
           >
+            <ConfettiProvider />
             <ToastProvider />
             {children}
             <Toaster richColors />
