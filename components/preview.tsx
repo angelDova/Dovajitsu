@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 
-import "react-quill/dist/bubble.snow.css";
+import "react-quill/dist/quill.bubble.css";
 
 interface PreviewProps {
   value: string;
@@ -15,5 +15,5 @@ export const Preview = ({ value }: PreviewProps) => {
     []
   );
 
-  return <ReactQuill theme="snow" value={value} readOnly />;
+  return <ReactQuill theme="bubble" value={value} readOnly />;
 };
