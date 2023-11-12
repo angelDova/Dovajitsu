@@ -41,8 +41,16 @@ export const ChapterActions = ({
         await axios.patch(
           `/api/courses/${courseId}/chapters/${chapterId}/publish`
         );
-        toast.success("Chapter published", {
+        const promise = () =>
+          new Promise((resolve) => setTimeout(resolve, 2000));
+
+        toast.promise(promise, {
+          loading: "Loading...",
+          success: () => {
+            return "Chapter published 🚀";
+          },
           position: "top-center",
+          error: "Error",
         });
       }
 
@@ -66,7 +74,7 @@ export const ChapterActions = ({
         position: "top-center",
       });
       router.refresh();
-      router.push(`/teacher/courses/${courseId}`);
+      router.push(`/dashboard/teacher/courses/${courseId}`);
     } catch {
       toast.error("Something went wrong", {
         position: "top-center",
