@@ -1,17 +1,10 @@
 "use client";
 
 import { Category } from "@prisma/client";
-import {
-  FcEngineering,
-  FcFilmReel,
-  FcMultipleDevices,
-  FcMusic,
-  FcOldTimeCamera,
-  FcSalesPerformance,
-  FcSportsMode,
-} from "react-icons/fc";
+import { FaHeadSideVirus } from "react-icons/fa";
 import { TbPlaystationTriangle } from "react-icons/tb";
-import { GiArmSling } from "react-icons/gi";
+import { GiArmSling, GiGuillotine, GiBlackBelt } from "react-icons/gi";
+import { BiConfused } from "react-icons/bi";
 import { IconType } from "react-icons";
 import { CategoryItem } from "./cateogry-item";
 
@@ -21,12 +14,12 @@ interface CategoriesProps {
 
 const iconMap: Record<Category["name"], IconType> = {
   "Art of the Triangle": TbPlaystationTriangle,
-  "Coach, What do I do from 50,50?": FcOldTimeCamera,
+  "Coach, What do I do from 50,50?": BiConfused,
   "All Aspects of the Armbar": GiArmSling,
-  "Guillotine Mastery": FcSalesPerformance,
-  "Front Headlocks": FcEngineering,
-  "All Access Dojo Membership/Month": FcFilmReel,
-  "All Access Dojo Membership/Year": FcMultipleDevices,
+  "Guillotine Mastery": GiGuillotine,
+  "Front Headlocks": FaHeadSideVirus,
+  "All Access Dojo Membership/Month": GiBlackBelt,
+  "All Access Dojo Membership/Year": GiBlackBelt,
 };
 
 export const Categories = ({ items }: CategoriesProps) => {
