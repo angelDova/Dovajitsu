@@ -19,6 +19,9 @@ async function main() {
           name: "Guillotine Mastery",
         },
         {
+          name: "Front Headlocks",
+        },
+        {
           name: "All Access Dojo Membership/Year",
         },
         {
