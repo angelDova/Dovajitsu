@@ -10,7 +10,7 @@ async function main() {
           name: "Art of the Triangle",
         },
         {
-          name: "Coach, What do I do from 50,50?",
+          name: "Coach, What do I do from 50/50?",
         },
         {
           name: "All Aspects of the Armbar",
