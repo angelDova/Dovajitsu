@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 
 import { CourseSidebarItem } from "./course-sidebar-item";
+import { useState } from "react";
 
 interface CourseSidebarProps {
   course: Course & {
