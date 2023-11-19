@@ -1,8 +1,9 @@
-import { db } from "@/lib/db";
-import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
+
+import { db } from "@/lib/db";
+import { stripe } from "@/lib/stripe";
 
 export async function POST(
   req: Request,
@@ -74,10 +75,22 @@ export async function POST(
         },
       });
     }
+
+    const session = await stripe.checkout.sessions.create({
+      customer: stripeCustomer.stripeCustomerId,
+      line_items,
+      mode: "payment",
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
+      metadata: {
+        courseId: course.id,
+        userId: user.id,
+      },
+    });
+
+    return NextResponse.json({ url: session.url });
   } catch (error) {
     console.log("[COURSE_ID_CHECKOUT]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
-
-//9:11:14
