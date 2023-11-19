@@ -11,7 +11,7 @@ const handleAuth = () => {
 
   const isAuthorized = isTeacher(userId);
 
-  if (!userId) throw new Error("Unauthorized");
+  if (!userId || !isAuthorized) throw new Error("Unauthorized");
   return { userId };
 };
 
@@ -28,5 +28,3 @@ export const ourFileRouter = {
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
-
-// 3:13:56
