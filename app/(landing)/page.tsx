@@ -14,7 +14,7 @@ const LandingPage = () => {
         <Heroes />
       </div>
       <Footer />
-      <HoverLinks />
+      {/* <HoverLinks /> */}
     </div>
   );
 };
