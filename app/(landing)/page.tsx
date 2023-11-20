@@ -3,6 +3,7 @@ import Heading from "./_components/heading";
 import { Heroes } from "./_components/heroes";
 import { Footer } from "./_components/footer";
 import SpinningBox from "@/components/spinning-box";
+import { HoverLinks } from "@/components/hover-links";
 
 const LandingPage = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage = () => {
         <Heroes />
       </div>
       <Footer />
+      <HoverLinks />
     </div>
   );
 };
