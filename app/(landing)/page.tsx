@@ -1,7 +1,7 @@
 import React from "react";
 import Heading from "./_components/heading";
 import { Heroes } from "./_components/heroes";
-import { Footer } from "./_components/footer";
+import { Footer } from "./_components/sections/footer";
 import SpinningBox from "@/components/spinning-box";
 import { HoverLinks } from "@/components/hover-links";
 
