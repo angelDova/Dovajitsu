@@ -4,20 +4,24 @@ export const links = [
     href: "/",
   },
   {
-    title: "Projects",
-    href: "/",
+    title: "About",
+    href: "#about",
   },
   {
-    title: "Agency",
-    href: "/",
+    title: "Clients",
+    href: "#clients",
   },
   {
-    title: "Expertise",
-    href: "/",
+    title: "Portfolio",
+    href: "#portfolio",
   },
   {
-    title: "Contact",
-    href: "/",
+    title: "Careers",
+    href: "#careers",
+  },
+  {
+    title: "Fun",
+    href: "#fun",
   },
 ];
 

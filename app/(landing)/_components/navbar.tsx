@@ -11,6 +11,7 @@ import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
 import Link from "next/link";
+import Header from "./header/page";
 
 export const Navbar = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -50,6 +51,7 @@ export const Navbar = () => {
           </>
         )}
         <ModeToggle />
+        <Header />
       </div>
     </div>
   );

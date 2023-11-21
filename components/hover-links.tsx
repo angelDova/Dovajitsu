@@ -9,34 +9,40 @@ export const HoverLinks = () => {
     <section className="bg-neutral-950 p-4 md:p-8 overflow-x-hidden">
       <div className="mx-auto max-w-5x">
         <Link
+          heading="Home"
+          subheading="Learn what we do here"
+          imgSrc="/imgs/random1.jpg"
+          href="/"
+        />
+        <Link
           heading="About"
           subheading="Learn what we do here"
           imgSrc="/imgs/random1.jpg"
-          href="#"
+          href="#about"
         />
         <Link
           heading="Clients"
           subheading="We work with great people"
           imgSrc="/imgs/random2.jpg"
-          href="#"
+          href="#clients"
         />
         <Link
           heading="Portfolio"
           subheading="Our work speaks for itself"
           imgSrc="/imgs/random3.jpg"
-          href="#"
+          href="#portfolio"
         />
         <Link
           heading="Careers"
           subheading="We want cool people"
           imgSrc="/imgs/random4.jpg"
-          href="#"
+          href="#careers"
         />
         <Link
           heading="Fun"
           subheading="Incase you're bored"
           imgSrc="/imgs/random5.jpg"
-          href="#"
+          href="#fun"
         />
       </div>
     </section>
