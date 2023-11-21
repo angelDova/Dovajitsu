@@ -51,7 +51,7 @@ export const Navbar = () => {
           </>
         )}
         <ModeToggle />
-        <Header />
+        {/* <Header /> */}
       </div>
     </div>
   );

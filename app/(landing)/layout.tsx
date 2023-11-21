@@ -1,10 +1,10 @@
-import About from "./_components/about";
-import Career from "./_components/career";
-import Client from "./_components/clients";
-import Fun from "./_components/fun";
+import About from "./_components/sections/about";
+import Career from "./_components/sections/career";
+import Client from "./_components/sections/clients";
+import Fun from "./_components/sections/fun";
 import Header from "./_components/header/page";
 import { Navbar } from "./_components/navbar";
-import Portfolio from "./_components/portfolio";
+import Portfolio from "./_components/sections/portfolio";
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
