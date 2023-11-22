@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -12,8 +13,12 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
 import Link from "next/link";
 import Header from "./header/page";
+import { Equal, LucideIcon } from "lucide-react";
+import { useState } from "react";
+import { IconBadge } from "@/components/icon-badge";
 
 export const Navbar = () => {
+  const [isActive, setIsActive] = useState(false);
   const { isAuthenticated, isLoading } = useConvexAuth();
   const scrolled = useScrollTop();
 
@@ -51,7 +56,20 @@ export const Navbar = () => {
           </>
         )}
         <ModeToggle />
-        {/* <Header /> */}
+        <Button
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
+          className="relative flex items-center"
+          variant="ghost"
+          size="icon"
+        >
+          <motion.div
+            className="relative"
+            animate={{ top: isActive ? "-100%" : "0" }}
+            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          ></motion.div>
+        </Button>
       </div>
     </div>
   );
