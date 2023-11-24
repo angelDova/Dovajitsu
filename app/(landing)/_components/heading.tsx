@@ -17,7 +17,7 @@ const Heading = () => {
         <span className="underline">Dovadoggdojo</span>
       </h1> */}
       <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-        Study Every Angle of the Game
+        Study Every Angle of the Game 🙏🏻
       </h3>
       {isLoading && (
         <div className="w-full flex items-center justify-center">

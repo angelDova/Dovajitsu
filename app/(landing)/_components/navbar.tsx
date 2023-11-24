@@ -13,9 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
 import Link from "next/link";
 import Header from "./header/page";
-import { Equal, LucideIcon } from "lucide-react";
 import { useState } from "react";
-import { IconBadge } from "@/components/icon-badge";
 
 export const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
