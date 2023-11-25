@@ -12,11 +12,11 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       <main className="h-full pt-40">
         {children}
-        <About />
+        {/* <About />
         <Client />
         <Portfolio />
         <Career />
-        <Fun />
+        <Fun /> */}
       </main>
     </div>
   );
