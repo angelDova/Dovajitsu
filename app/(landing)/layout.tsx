@@ -15,7 +15,6 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
         <About />
         <Client />
         <Portfolio />
-        <Portfolio />
         <Career />
         <Fun />
       </main>
